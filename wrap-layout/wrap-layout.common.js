@@ -1,20 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var wrap_layout_1 = require("tns-core-modules/ui/layouts/wrap-layout");
-var properties_1 = require("tns-core-modules/ui/core/properties/properties");
-var Common = (function (_super) {
-    __extends(Common, _super);
-    function Common() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    return Common;
-}(wrap_layout_1.WrapLayout));
+exports.directionProperty = exports.isRtlProperty = exports.Common = void 0;
+const wrap_layout_1 = require("@nativescript/core/ui/layouts/wrap-layout");
+const ui_1 = require("@nativescript/core/ui");
+class Common extends wrap_layout_1.WrapLayout {
+}
 exports.Common = Common;
-exports.isRtlProperty = new properties_1.Property({
+exports.isRtlProperty = new ui_1.Property({
     name: "isRtl",
     defaultValue: true,
-    valueConverter: function (v) {
-        var lowercase = (v + "").toLowerCase();
+    valueConverter(v) {
+        let lowercase = (v + "").toLowerCase();
         if (lowercase === "true") {
             return true;
         }
@@ -25,17 +21,17 @@ exports.isRtlProperty = new properties_1.Property({
     }
 });
 exports.isRtlProperty.register(Common);
-exports.directionProperty = new properties_1.CssProperty({
+exports.directionProperty = new ui_1.CssProperty({
     name: "direction",
     cssName: "direction",
     defaultValue: "rtl",
-    valueConverter: function (value) {
-        var val = value.toLocaleLowerCase();
+    valueConverter: (value) => {
+        const val = value.toLocaleLowerCase();
         if (val === "rtl" || val === "ltr") {
             return val;
         }
         throw new Error("Invalid string: " + val);
     }
 });
-exports.directionProperty.register(properties_1.Style);
+exports.directionProperty.register(ui_1.Style);
 //# sourceMappingURL=wrap-layout.common.js.map
